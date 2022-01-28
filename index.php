@@ -21,6 +21,7 @@
     */
 
     include_once __DIR__ . "/User.php";
+    include_once __DIR__ . "/PremiumUser.php";
     include_once __DIR__ . "/PC.php";
     include_once __DIR__ . "/Smartphone.php";
     include_once __DIR__ . "/Console.php";
@@ -31,7 +32,6 @@
     $asus->ram = 16;
     $asus->rom = 2000;
     $asus->price = 2000;
-
 
     $iphone13 = new Smartphone("Apple", "iPhone 13");
     $iphone13->display = "1920x1080";
@@ -51,7 +51,7 @@
     $fridge->rom = 2;
     $fridge->price = 1000;
 
-    $luca = new User("Luca", "Rossi", "luca@rossi.it");
+    $luca = new PremiumUser("Luca", "Rossi", "luca@rossi.it");
 
     $luca->getAddProduct($asus);
     $luca->getAddProduct($iphone13);
@@ -61,7 +61,6 @@
     $lucaBasket = $luca->getBasket();
 
     var_dump($luca);
-
 
 ?>
 
@@ -113,7 +112,6 @@
 
         flex-wrap: wrap;
 
-
     }
 
     .product{
@@ -123,7 +121,13 @@
 
         background-color: lightcoral;
         border-radius: 10px;
-        
+
+    }
+
+    .pricePremium{
+
+        color: red;
+        text-decoration: line-through;
 
     }
 
@@ -142,13 +146,28 @@
         <?php foreach( $lucaBasket as $basket ){ ?>
 
             <div class="product">
+
                 <h2>Marca: <?php echo $basket->brand ?></h2>
                 <h3>Modello: <?php echo $basket->model ?></h3>
-
                 <div>Display: <?php echo $basket->display ?></div>
                 <div>Ram: <?php echo $basket->ram ?>GB</div>
                 <div>Rom: <?php echo $basket->rom ?>GB</div>
-                <div>Price: <span class="price"><?php echo $basket->price ?>€</span></div>
+                
+                <?php if(isset($luca->discount)){ ?>
+
+                    <?php $normalPrice = $basket->price; ?>
+                    <?php $discount = $luca->discount; ?>
+                    <?php $discountPrice = ( $normalPrice * $discount ) / 100 ; ?>
+
+                    <?php $premiumPrice = $normalPrice - $discountPrice ; ?>
+
+                    <div>Price: <span class="pricePremium"><?php echo $basket->price ?>€</span> -> <span class="price"><?php echo $premiumPrice ?>€</span></div>
+
+                <?php } else{ ?>
+
+                    <div>Price: <span class="price"><?php echo $basket->price ?>€</span></div>
+
+                <?php } ?>
 
             </div>
 
