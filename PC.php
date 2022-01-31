@@ -5,7 +5,6 @@
     class PC extends ElectronicProduct{
 
 
-
     }
 
 ?>

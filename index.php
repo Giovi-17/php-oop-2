@@ -27,27 +27,23 @@
     include_once __DIR__ . "/Console.php";
     include_once __DIR__ . "/Fridge.php";
 
-    $asus = new PC("Asus", "X555");
+    $asus = new PC("Asus", "X555", 16);
     $asus->display = "2560x1440";
-    $asus->ram = 16;
     $asus->rom = 2000;
     $asus->price = 2000;
 
-    $iphone13 = new Smartphone("Apple", "iPhone 13");
+    $iphone13 = new Smartphone("Apple", "iPhone 13", 6);
     $iphone13->display = "1920x1080";
-    $iphone13->ram = 6;
     $iphone13->rom = 256;
     $iphone13->price = 1300;
 
-    $playstation5 = new Console("Sony", "Playstation 5");
+    $playstation5 = new Console("Sony", "Playstation 5", 16);
     $playstation5->display = "none";
-    $playstation5->ram = 16;
     $playstation5->rom = 1000;
     $playstation5->price = 500;
 
-    $fridge = new Console("LG", "MegaCold");
+    $fridge = new Console("LG", "MegaCold", 4);
     $fridge->display = "500x500";
-    $fridge->ram = 4;
     $fridge->rom = 2;
     $fridge->price = 1000;
 
@@ -60,7 +56,8 @@
 
     $lucaBasket = $luca->getBasket();
 
-    var_dump($luca);
+/*     var_dump($luca); */
+
 
 ?>
 
